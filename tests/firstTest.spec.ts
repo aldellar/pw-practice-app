@@ -60,8 +60,15 @@ test('Locating child elements', async({page}) => {
     await page.locator('nb-card').getByRole('button', {name: "Sign In"}).first().click() //you can mix these methods together
     await page.locator('nb-card').nth(3).getByRole('button').click() //try to avoid this though 
 })
-//minimum of how test is contstrcted
 
+test('Locating using parent elements', async({page}) => {
+    await page.locator('nb-card', {hasText: "Using the Grid"}).getByRole('textbox', {name: "Email"}).click()
+    await page.locator('nb-card', {has: page.locator('#inputEmail1')}).getByRole('textbox', {name: "Email"}).click()
+    
+    await page.locator('nb-card').filter({hasText: "Basic form"}).getByRole('textbox', {name: "Email"}).click()
+    await page.locator('nb-card').filter({has: page.locator('.status-danger')}).getByRole('textbox', {name: "Password"}).click()
+    await page.locator('nb-card').filter({has: page.locator('nb-checkbox')}).filter({hasText: "Sign in"}).getByRole('textbox', {name: "Email"}).click()
+})
 /* 
 test.describe('test suite 1', () => {
 
