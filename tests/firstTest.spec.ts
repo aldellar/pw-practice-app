@@ -58,6 +58,7 @@ test('Locating child elements', async({page}) => {
     await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click() //same as above just not as compact
 
     await page.locator('nb-card').getByRole('button', {name: "Sign In"}).first().click() //you can mix these methods together
+    await page.locator('nb-card').nth(3).getByRole('button').click() //try to avoid this though 
 })
 //minimum of how test is contstrcted
 
