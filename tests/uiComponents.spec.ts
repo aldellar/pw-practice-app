@@ -87,3 +87,16 @@ test('checkboxes', async({page}) => {
         await expect(header).toHaveCSS('background-color', colors[color])
     }
 })*/
+
+test('tooltips', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Tooltip').click()
+
+    const toolTipCard = page.locator('nb-card', {hasText: "Tooltip placements"})
+    await toolTipCard.getByRole('button', {name: "Top"}).hover()
+
+    page.getByRole('tooltip') //if you have a role tooltip created in your webpage
+    const tooltip = await page.locator('nb-tooltip').textContent()
+    expect(tooltip).toEqual('This is a tooltip')
+
+})
