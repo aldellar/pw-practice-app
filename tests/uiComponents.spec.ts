@@ -37,7 +37,19 @@ test.describe('From Layouts page', () => {
         await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force: true})
         expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()).toBeFalsy()
         expect(await usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
-
     })
 })
+test('checkboxes', async({page}) => {
+    await page.getByText('Modal & Overlays').click()
+    await page.getByText('Toastr').click()
+    //click does not care if selected or not it will just click it check uncheck will only do that and wont do the oposite
+    await page.getByRole('checkbox', {name: "Hide on click"}).uncheck({force: true})
+    await page.getByRole('checkbox', {name: "Prevent arising of duplicate toast"}).check({force: true})
 
+    //select unselect ALL checkboxes on the page
+    const allBoxes = page.getByRole('checkbox')
+    for(const box of await allBoxes.all()){ //.all() will create an array of all the boxes
+        await box.uncheck({force: true})
+        expect(await box.isChecked()).toBeFalsy();
+    }
+})
