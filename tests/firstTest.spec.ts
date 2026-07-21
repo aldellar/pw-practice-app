@@ -1,5 +1,7 @@
 import {test, expect} from '@playwright/test';
-
+/**
+ * This file is a series of test following along to the udemy testing course
+ */
 
 /*test.beforeAll(() => { //this before every single test dont really use this that much
 
@@ -120,20 +122,7 @@ test('assertions', async({page}) => {
     await expect(basicFormButton).toHaveText('Submit')
 
     //Soft Assertion
-    await expect.soft(basicFormButton).toHaveText('Submit5')
+    await expect.soft(basicFormButton).toHaveText('Submit5') //using soft assertion is not a really good practice
     await basicFormButton.click()
 })
-/* 
-test.describe('test suite 1', () => {
 
-    test('the first test', () => {
-
-    })test('the first test', () => {
-
-    })test('the first test', () => {
-
-    })
-
-})
-
-*/
