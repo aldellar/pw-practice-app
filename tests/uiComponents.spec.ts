@@ -25,4 +25,19 @@ test.describe('From Layouts page', () => {
         //locator assertion
         await expect(usingTheGridEmailInput).toHaveValue('test2@test.com')
     })
+    test('radio buttons', async({page}) => {
+        const usingTheGridForm = page.locator('nb-card', {hasText: "Using the Grid"})
+
+       // await usingTheGridForm.getByLabel('Option 1').check({force: true})
+        await usingTheGridForm.getByRole('radio', {name: "Option 1"}).check({force: true})      //find it using force here if it is hidden
+        const radioSatus = await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()    //boolean that it is checked generic assertion
+        expect(radioSatus).toBeTruthy() //verify that it is check
+        await expect(usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked() //another way to check locator assertion
+
+        await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force: true})
+        expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()).toBeFalsy()
+        expect(await usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
+
+    })
 })
+
