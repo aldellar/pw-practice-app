@@ -5,6 +5,7 @@ test.beforeEach(async({page}) => {
     await page.goto('http://localhost:4200/')
 })
 
+
 test.describe('From Layouts page', () => {
     test.beforeEach(async({page}) => {
         await page.getByText('Forms').click()
@@ -39,6 +40,8 @@ test.describe('From Layouts page', () => {
         expect(await usingTheGridForm.getByRole('radio', {name: "Option 2"}).isChecked()).toBeTruthy()
     })
 })
+
+
 test('checkboxes', async({page}) => {
     await page.getByText('Modal & Overlays').click()
     await page.getByText('Toastr').click()
@@ -53,3 +56,34 @@ test('checkboxes', async({page}) => {
         expect(await box.isChecked()).toBeFalsy();
     }
 })
+
+
+/* this doesn't really work "test('lsits and dropdowns', async({page}) => {
+    const dropDownMenu = page.locator('ngx-header nb-select')
+    await dropDownMenu.click()
+
+    page.getByRole('list')  //when the list has an ul tag
+    page.getByRole('listitem')  //when the list has a li tag
+
+    // const optionList = page.getByRole('list').locator('nb-option') // we need to do this because the list items dont have li tag
+    const optionList = page.locator('nb-option-list nb-option')
+
+    await expect(optionList).toHaveText(["Light", "Dark", "Cosmic", "Corporate"])
+
+    await optionList.filter({hasText: "Cosmic"}).click()
+    const header = page.locator('nb-layout-header')
+    await expect(header).toHaveCSS('background-color', 'rgb(50, 50, 89)')
+
+    const colors: Record<string, string> = {
+        "Light": "rgb(255, 255, 255)",
+        "Dark": "rgb(34, 43, 69)",
+        "Cosmic": "rgb(50,50,89)",
+        "Corporate": "rgb(255, 255, 255)"
+    }
+
+    await dropDownMenu.click()
+    for(const color in colors){
+        await optionList.filter({hasText: color}).click()//this is taking the key value and click them
+        await expect(header).toHaveCSS('background-color', colors[color])
+    }
+})*/
