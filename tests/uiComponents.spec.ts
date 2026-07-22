@@ -180,6 +180,33 @@ test('Datepicker test', async({page}) => {
     await page.locator('[class="day-cell ng-star-inserted"]').getByText(expectedDate, {exact: true}).click()
     await expect(calendarInputField).toHaveValue(dateToAssert)
 })
+
+test('sliders', async({page}) => {
+    //update attribute
+    const tempGauge = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger circle')
+    await tempGauge.evaluate( node => {
+        node.setAttribute('cx', '232.630')
+        node.setAttribute('cy', '232.630')
+    })
+    await tempGauge.click() //without this it wasn't updating
+
+    //simulate mouse movement
+    const tempBox = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger')
+    await tempBox.scrollIntoViewIfNeeded()
+
+    const box = await tempBox.boundingBox()
+    if (!box) throw new Error('Unable to determine bounding box for temperature slider')
+    const x = box.x + box.width / 2
+    const y = box.y + box.height / 2
+    await page.mouse.move(x,y)
+    await page.mouse.down()
+    await page.mouse.move(x + 100, y)
+    await page.mouse.move(x + 100, y+100)
+    await page.mouse.up()
+    await expect(tempBox).toContainText('30')
+
+})
+
 /*test('default', async({page}) => {
     await page.getByText('Modal & Overlays').click()
     await page.getByText('Tooltip').click()
