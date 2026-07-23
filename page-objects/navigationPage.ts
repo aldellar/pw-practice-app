@@ -1,43 +1,34 @@
 import { Locator, Page } from "@playwright/test"
+import { HelperBase } from "./helperBase"
 
-export class NavigationPage {
-    readonly page: Page
-    readonly formLayoutsMenuItem: Locator
-    readonly datePickerMenuItem: Locator
-    readonly smartTableMenuItem: Locator    //you can do this but honestly it would be best to keep the locator inside of the tests
-    readonly toastrMenuItem: Locator
-    readonly tooltipMenuItem: Locator
+export class NavigationPage extends HelperBase{
 
     constructor(page: Page){
-        this.page = page
-        this.formLayoutsMenuItem = page.getByText('Form Layouts')
-        this.datePickerMenuItem = page.getByText('Datepicker')
-        this.smartTableMenuItem = page.getByText('Smart Table')
-        this.toastrMenuItem = page.getByText('Toastr')
-        this.tooltipMenuItem = page.getByText('Tooltip')
+        super(page)
     }
 
     async formLayoutsPage(){
         await this.selectGroupMenuItem('Forms') // you can keep the locator inside here that way it makes it more simple 
-        await this.formLayoutsMenuItem.click()
+        await this.page.getByText('Form Layouts').click()
+        await this.waitForNumberOfSeconds(2)
     }
 
     async datePickerPage(){
         await this.selectGroupMenuItem('Forms')
-        await this.datePickerMenuItem.click()
+        await this.page.getByText('Datepicker').click()
     }
 
     async smartTablePage(){
         await this.selectGroupMenuItem('Tables & Data')
-        await this.smartTableMenuItem.click()
+        await this.page.getByText('Smart Table').click()
     }
     async toastrPage(){
         await this.selectGroupMenuItem('Modal & Overlays')
-        await this.toastrMenuItem.click()
+        await this.page.getByText('Toastr').click()
     }
     async tooltipPage(){
         await this.selectGroupMenuItem('Modal & Overlays')
-        await this.tooltipMenuItem.click()
+        await this.page.getByText('Tooltip').click()
     }
 
     private async selectGroupMenuItem(groupItemTitle: string){
