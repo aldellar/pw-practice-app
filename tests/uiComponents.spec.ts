@@ -1,14 +1,15 @@
 import {test, expect} from '@playwright/test'
-import { using } from 'rxjs'
 
-test.beforeEach(async({page}) => {
+//test.describe.configure({mode: 'parallel'})
+
+test.beforeEach(async ({page}) => {
     await page.goto('http://localhost:4200/')
 })
 
 
 test.describe('From Layouts page', () => {
     test.describe.configure({retries: 2})
-    test.beforeEach(async({page}) => {
+    test.beforeEach(async ({page}) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
@@ -21,7 +22,7 @@ test.describe('From Layouts page', () => {
 
         await usingTheGridEmailInput.fill('test@test.com')
         await usingTheGridEmailInput.clear()
-        await usingTheGridEmailInput.pressSequentially('test2@test.com', {delay: 50})
+        await usingTheGridEmailInput.pressSequentially('test2@test.com')
 
         //generic assertion
         const inputValue = await usingTheGridEmailInput.inputValue()

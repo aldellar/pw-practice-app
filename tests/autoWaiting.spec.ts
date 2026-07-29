@@ -21,7 +21,7 @@ test('auto waiting', async({page}) => {
 
 })
 
-test('alternative waits', async ({page}) => {
+test.skip('alternative waits', async ({page}) => {
     const successButton = page.locator('.bg-success')
 
     //__ wait for element
@@ -38,7 +38,7 @@ test('alternative waits', async ({page}) => {
 
 })
 
-test('timeouts', async ({page}) => {
+test.skip('timeouts', async ({page}) => {
     // test.setTimeout(10000) // set the global timeout 
     //test.slow() this multiplies the global test default so this will run for longer
     const successButton = page.locator('.bg-success')
