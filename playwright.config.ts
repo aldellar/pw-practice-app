@@ -38,7 +38,11 @@ export default defineConfig({
 
     //setting timeouts
     // actionTimeout: 5000,
-    // navigationTimeout: 5000
+    navigationTimeout: 5000,
+    video: {
+      mode: 'on',
+      size: {width: 1920, height: 1080}
+    }
   },
 
   /* Configure projects for major browsers */
