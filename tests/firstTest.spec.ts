@@ -11,7 +11,7 @@ import {test, expect} from '@playwright/test';
 
 //in this case before each happens before all test
 test.beforeEach(async({page}) => {      //hooks basically repeating stuff
-    await page.goto('http://localhost:4200/')       //if they are promise methods make sure you use await
+    await page.goto('/')       //if they are promise methods make sure you use await
     await page.getByText('Forms').click()
     await page.getByText('Form Layouts').click()
 })
