@@ -21,9 +21,9 @@ export default defineConfig<TestOptions>({
   use: {
 
     globalsQaURL: 'https://www.globalsqa.com/demo-site/draganddrop',
-    baseURL: process.env.DEV === '1' ? 'http://localhost:4200/'
+    baseURL: process.env.DEV === '1' ? 'http://localhost:4201/'
         : process.env.STAGING == '1' ? 'http://localhost/4202/'
-        : 'http://localhost:4201',
+        : 'http://localhost:4200',
 
     trace: 'on-first-retry',
 
@@ -40,7 +40,7 @@ export default defineConfig<TestOptions>({
     {
       name: 'dev',
       use: { ...devices['Desktop Chrome'],
-        baseURL: 'https://localhost4202'
+        baseURL: 'https://localhost4200'
       },
     },
        {
