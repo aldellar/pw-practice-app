@@ -20,8 +20,8 @@ export default defineConfig<TestOptions>({
   reporter: [
     ['json', {outputFile: 'test-results/jsonReport.json'}],
     ['junit', {outputFile: 'test-results/junitReport.xml'}],
-    ['allure-playwright']
-  
+    //['allure-playwright'],
+    ['html']
   ],
   use: {
 
@@ -45,7 +45,7 @@ export default defineConfig<TestOptions>({
     {
       name: 'dev',
       use: { ...devices['Desktop Chrome'],
-        baseURL: 'https://localhost4200'
+        baseURL: 'http://localhost:4200'
       },
     },
        {
